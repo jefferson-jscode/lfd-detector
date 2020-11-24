@@ -42,8 +42,9 @@ def try_download(url_object):
 
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description='Check websites for LFD (Local File Download) vulnerability.')
+  # parser = argparse.ArgumentParser(description='Check websites for LFD (Local File Download) vulnerability.')
   '''
+    TODO: Implement command line options with argparse
     Options:
       
       --input: INPUT FILE
@@ -53,12 +54,16 @@ if __name__ == '__main__':
 
   '''
 
+  if len(sys.argv) < 2:
+    print('Usage: python lfd-detector.py <urls_file>')
+    sys.exit()
 
-  urls_to_try = read_file('test_urls.txt')
+
+  urls_to_try = read_file(sys.argv[1])
 
   for url in urls_to_try:
     url_object = urlparse(url)
-    
+
     try:
       response = try_download(url_object)
 
